@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Add Wish List Item</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'wish_list/css/style.css' %}" type="text/css">
+
+    </head>
+    <body>
+        <h1 class="greeting">Add new item to wish list</h1 class="greeting logout"><h1 class="greeting logout"><a href="/dashboard">Home</a></h1><h1 class="greeting logout"><a href="/logout">Logout</a></h1>
+        <form class="" action="/additem" method="post">
+            <label for="item">Item</label>
+            <input type="text" name="item" value="" maxlength="30">
+            <input type="submit" name="submit" value="Add">
+            {% csrf_token %}
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{message.tags}}">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>

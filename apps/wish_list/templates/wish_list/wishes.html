@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Wishes</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'wish_list/css/style.css' %}" type="text/css">
+    </head>
+    <body>
+        <h1 class="greeting">{{wishes.0.item_id.item}}</h1><h1 class="greeting logout"><a href="/dashboard">Home</a></h1></h1><h1 class="greeting logout"><a href="/logout">Logout</h1></a><hr>
+        <h2>Users who added this item to their wish list:</h2>
+        {% for user in wishes %}
+            <p>{{user.user_id.first_name}}</p>
+            {% endfor %}
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dashboard</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'wish_list/css/style.css' %}" type="text/css">
+    </head>
+    <body>
+        <h1 class="greeting">Hello, {{request.session.first_name}}!</h1><h1 class="greeting logout"><a href="/logout">Logout</h1></a><hr>
+        <h2>Your Wish list:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Originally Added By</th>
+                    <th>Dated Added</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for wish in wishes %}
+                <tr>
+                    <td><a href="/wishes/{{wish.item_id.id}}">{{wish.item_id.item}}</a></td>
+                    <td>{{wish.item_id.user_id.first_name}}</td>
+                    <td>{{wish.item_id.created_at|date:"m/d/Y"}}&nbsp&nbsp&nbsp&nbsp&nbsp{{wish.item_id.created_at|date:"g:i a"}}</td>
+                    <td>{% if wish.item_id.user_id.id == request.session.id %}<a href="/deleteitem/{{wish.item_id.id}}">Delete item</a></td>{% else %}<a href="/removeitem/{{wish.item_id.id}}">Remove from list</a>{% endif %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table><br>
+
+        <h2>Other Wish Lists:</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>List Owner</th>
+                    <th>Dated Added to List</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for wish in allWishes %}
+                <tr>
+                    <td><a href="/wishes/{{wish.item_id.id}}">{{wish.item_id.item}}</a></td>
+                    <td>{{wish.user_id.first_name}}</td>
+                    <td>{{wish.item_id.created_at|date:"m/d/Y"}}&nbsp&nbsp&nbsp&nbsp&nbsp{{wish.item_id.created_at|date:"g:i a"}}</td>
+                    <td><a href="/addfromanother/{{wish.item_id.id}}">Add to my list</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table><br>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{message.tags}}">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        <a href="/create">Add Item</a>
+    </body>
+</html>

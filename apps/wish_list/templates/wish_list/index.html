@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Wish List Login Page</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'wish_list/css/style.css' %}" type="text/css">
+    </head>
+    <body>
+        <h1>Login</h1>
+        <form class="" action="/validate" method="post">
+            <label for="email">Email: </label>
+            <input type="text" name="email" value=""><br>
+            <label for="password">Password: </label>
+            <input type="password" name="password" value=""><br>
+            <input type="submit" name="submit" value="Login">
+            <input type="hidden" name="action" value="login">
+            {% csrf_token %}
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{message.tags}}">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        <h1>Registration</h1>
+        <form class="" action="/validate" method="post">
+            <label for="first_name">First Name: </label>
+            <input type="text" name="first_name" value=""><br>
+            <label for="last_name">Last Name: </label>
+            <input type="text" name="last_name" value=""><br>
+            <label for="email">Email: </label>
+            <input type="text" name="email" value=""><br>
+            <label for="password">Password: </label>
+            <input type="password" name="password" value=""><br>
+            <label for="vpassword">Verify Password: </label>
+            <input type="password" name="vpassword" value=""><br>
+            <input type="submit" name="submit" value="Register">
+            <input type="hidden" name="action" value="register">
+            {% csrf_token %}
+        </form>
+    </body>
+</html>

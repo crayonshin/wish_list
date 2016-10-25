@@ -1,0 +1,15 @@
+th {
+    width: 200px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+.greeting {
+    display: inline-block;
+}
+.logout {
+    margin-left: 200px;
+}
+.error {
+    color: red;
+}
